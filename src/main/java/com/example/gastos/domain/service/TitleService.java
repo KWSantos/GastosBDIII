@@ -81,5 +81,10 @@ public class TitleService implements ICRUDService<TitleRequestDTO, TitleResponse
             throw new ResourceBadRequestException("Titulo invalido");
         }
     }
+
+    public List<TitleResponseDTO> getByMaturityDate(String initialPeriod, String finalPeriod) {
+        List<Title> titles = titleRepository.getByMaturityDate(initialPeriod, finalPeriod);
+        return titles.stream().map(title -> modelMapper.map(title, TitleResponseDTO.class)).collect(Collectors.toList());
+    }
     
 }
